@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -18,15 +20,20 @@ public class LoginSteps {
 //	LoginPage loginPage;
 //	HomePage homePage;
 //	
-//	@Given("browser is open")
-//	public void browser_is_open() {
-//		System.out.println("-----> I'm inside LoginSteps");
+//	@Before
+//	public void browserSetup() {
 //	    String projectPath = System.getProperty("user.dir");
 //	    System.setProperty("webdriver.chrome.driver", projectPath + "/src/test/resources/drivers/chromedriver.exe");
 //	    driver = new ChromeDriver();
 //	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 //	    driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 //	    driver.manage().window().maximize();
+//	}
+//	
+//	@After
+//	public void browserTeardown() {
+//		driver.close();
+//		driver.quit();
 //	}
 //	
 //	@Given("user is on login page")
@@ -58,11 +65,5 @@ public class LoginSteps {
 //	public void user_is_navigated_to_the_home_page() {
 //		homePage = new HomePage(driver);
 //		homePage.verifyLogOutButtonDisplay();
-//	}
-//	
-//	@And("user closes the browser")
-//	public void user_closes_the_browser() {
-//	    driver.close();
-//	    driver.quit();
 //	}
 }

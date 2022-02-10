@@ -6,6 +6,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import io.cucumber.java.After;
+import io.cucumber.java.AfterAll;
+import io.cucumber.java.AfterStep;
+import io.cucumber.java.Before;
+import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -18,9 +23,8 @@ public class LoginFactorySteps {
 	LoginFactoryPage loginFactoryPage;
 	HomeFactoryPage homeFactoryPage;
 	
-	@Given("browser is open")
-	public void browser_is_open() {
-		System.out.println("-----> I'm inside LoginFactorySteps");
+	@Before
+	public void browserSetup() {
 	    String projectPath = System.getProperty("user.dir");
 	    System.setProperty("webdriver.chrome.driver", projectPath + "/src/test/resources/drivers/chromedriver.exe");
 	    driver = new ChromeDriver();
@@ -28,6 +32,32 @@ public class LoginFactorySteps {
 	    driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 	    driver.manage().window().maximize();
 	}
+	
+	@After()
+	public void browserTeardown() {
+		driver.close();
+		driver.quit();
+	}
+	
+//	@After(value = "@smoke", order = 2)
+//	public void browserTeardown1() {
+//		System.out.println("hook be @smoke tag only");
+//	}
+//	
+//	@BeforeStep
+//	public void beforeStep() {
+//		System.out.println("before step hook");
+//	}
+//	
+//	@AfterStep
+//	public void afterStep1() {
+//		System.out.println("after step hook");
+//	}
+//	
+//	@AfterAll
+//	public static void before_or_after_all() {
+//		System.out.println("after all hook");
+//	}
 	
 	@Given("user is on login page")
 	public void user_is_on_login_page() {
@@ -57,11 +87,5 @@ public class LoginFactorySteps {
 	public void user_is_navigated_to_the_home_page() {
 		homeFactoryPage = new HomeFactoryPage(driver);
 		homeFactoryPage.verifyLogOutButtonDisplay();
-	}
-	
-	@And("user closes the browser")
-	public void user_closes_the_browser() {
-	    driver.close();
-	    driver.quit();
 	}
 }
